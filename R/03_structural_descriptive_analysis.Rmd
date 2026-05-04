@@ -248,7 +248,84 @@ df[, title_salience_broad := salience_broad[.(country, year, title_broad), salie
 
 ```
 
+##Descriptive data of salience
 
+```{r}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+
+# Keep only the years of interest and compute mean salience by country-year-topic
+topic_year <- df %>%
+  filter(between(year, 1945, 2020)) %>%
+  group_by(country, year, section_topic) %>%
+  summarise(
+    section_salience = mean(section_salience, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  group_by(country, year) %>%
+  mutate(
+    salience_standardized = ifelse(
+      sd(section_salience, na.rm = TRUE) == 0,
+      NA_real_,
+      (section_salience - mean(section_salience, na.rm = TRUE)) /
+        sd(section_salience, na.rm = TRUE)
+    )
+  ) %>%
+  ungroup()
+
+# Identify the top 5 topics within each country
+top5_topics <- topic_year %>%
+  group_by(country, section_topic) %>%
+  summarise(
+    mean_standardized_salience = mean(salience_standardized, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  group_by(country) %>%
+  slice_max(order_by = mean_standardized_salience, n = 5, with_ties = FALSE) %>%
+  ungroup()
+
+# Create and save LaTeX table
+latex_table <- top5_topics %>%
+  arrange(country, desc(mean_standardized_salience)) %>%
+  mutate(mean_standardized_salience = round(mean_standardized_salience, 2)) %>%
+  kable(
+    format = "latex",
+    booktabs = TRUE,
+    caption = "Top 5 section topics by mean standardized salience (1945--2020)",
+    col.names = c("Country", "Section Topic", "Mean standardized salience")
+  )
+
+writeLines(latex_table, "top5_topics_by_country.tex")
+
+# Plot only the top 5 topics
+plot_data <- topic_year %>%
+  semi_join(top5_topics, by = c("country", "section_topic"))
+
+p <- ggplot(
+  plot_data,
+  aes(
+    x = year,
+    y = salience_standardized,
+    color = section_topic,
+    group = section_topic
+  )
+) +
+  geom_line(linewidth = 0.9) +
+  geom_point(size = 1.8) +
+  facet_wrap(~ country, nrow = 1) +
+  labs(
+    x = "Year",
+    y = "Standardized salience",
+    color = "Section topic",
+    title = "Top 5 topics by country (1945--2020): change in salience over time"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+ggsave("top5_salience_over_time.pdf", plot = p, width = 12, height = 4.5)
+ggsave("top5_salience_over_time.png", plot = p, width = 12, height = 4.5, dpi = 300)
+```
 
 
 ## Lobbying power
