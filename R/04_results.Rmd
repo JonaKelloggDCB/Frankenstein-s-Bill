@@ -34,8 +34,10 @@ suppressPackageStartupMessages({
 ## Load data
 
 Load the final merged dataset produced by 03_structural_descriptive_analysis.Rmd.
-Place the file in data/ (available on Google Drive):
-https://drive.google.com/drive/folders/1qhlCgEDZf6_V5UZm3bGnyvRdhsjHgEl5
+Place the file in data/ — `df_final_merged.csv` is provided in the Zenodo archive
+(DOI 10.5281/zenodo.20749943); note this script also reads `EU_lobby.ods`, which is a
+public input (see `data/README.md`):
+https://doi.org/10.5281/zenodo.20749943
 
 ```{r}
 df <- read.csv("data/df_final_merged.csv", stringsAsFactors = FALSE)

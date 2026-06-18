@@ -15,10 +15,11 @@ Welcome to the exploratory analysis for the Frankenstein's Bill project. This sc
 
 # Load Data
 
-Data are stored on Google Drive:
-https://drive.google.com/drive/folders/1qhlCgEDZf6_V5UZm3bGnyvRdhsjHgEl5
+`df_top10.csv` is provided in the Zenodo archive (DOI 10.5281/zenodo.20749943):
+https://doi.org/10.5281/zenodo.20749943
 
-Download `df_top10.csv` and place it in the `data/` folder before running.
+Download `df_top10.csv` (unzip `df_top10.csv.zip`) and place it in the `data/` folder before
+running. See `data/README.md` for the full data breakdown.
 
 ```{r}
 df_all <- read.csv("data/df_top10.csv")

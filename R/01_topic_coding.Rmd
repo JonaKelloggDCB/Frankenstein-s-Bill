@@ -87,10 +87,11 @@ readr
 
 # File Structure and Paths
 
-All file paths are defined relative to the project root. Raw data files are stored on Google Drive:
-https://drive.google.com/drive/folders/1qhlCgEDZf6_V5UZm3bGnyvRdhsjHgEl5
-
-Download the data folder and place its contents inside `data/` before running this script.
+All file paths are defined relative to the project root. The raw inputs this script reads
+(BillSum, EUR-Lex, and the four raw law texts) are publicly available from their original
+sources; the processed datasets are on Zenodo (DOI 10.5281/zenodo.20749943). See
+`data/README.md` for the full file-by-file breakdown, then place everything inside `data/`
+before running this script.
 
 ```{r}
 data_dir <- "data"

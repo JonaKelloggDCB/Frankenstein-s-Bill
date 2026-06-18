@@ -1,16 +1,24 @@
 # Frankenstein's Bill: The Political Utility of Disjointed Legislation
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20749943.svg)](https://doi.org/10.5281/zenodo.20749943)
+
 This repository contains the replication code for the MPhil thesis *"Frankenstein's Bill: The Political Utility of Disjointed Legislation."* The project identifies and measures provisions within legislation that are textually unrelated to a bill's stated purpose, examining how policymakers strategically exploit this disjointedness to create ambiguity, obscure rider provisions, and advance political goals. Two section-level measures are constructed for roughly 1.75 million legislative sections drawn from the United States, the European Union, and France.
 
 ---
 
 ## Data
 
-All raw and processed data files are stored on Google Drive (too large for GitHub):
+The **processed datasets** are archived on Zenodo under an open CC-BY-4.0 licence with a permanent, citable DOI:
 
-**[Google Drive data folder](https://drive.google.com/drive/folders/1qhlCgEDZf6_V5UZm3bGnyvRdhsjHgEl5)**
+**[Zenodo data archive — DOI 10.5281/zenodo.20749943](https://doi.org/10.5281/zenodo.20749943)**
 
-Download the contents and place them inside the `data/` directory before running any script.
+The **raw source corpora and lobbying inputs are publicly available** from their original providers (see *Data sources* below) and are not redistributed here. See [`data/README.md`](data/README.md) for the full file-by-file breakdown of what comes from Zenodo versus public sources. Place both the Zenodo contents and the public inputs inside the `data/` directory before running any script.
+
+### Citing the data
+
+> Kellogg, J. (2026). *Frankenstein's Bill: The Political Utility of Disjointed Legislation — Replication Data* [Data set]. Zenodo. https://doi.org/10.5281/zenodo.20749943
+
+The link above is the **concept DOI**, which always resolves to the latest version. To cite this exact release, use `10.5281/zenodo.20749944`.
 
 ### Data sources
 
@@ -47,7 +55,7 @@ R/
    ```r
    Sys.setenv(MANIFESTO_API_KEY = "your_key_here")
    ```
-3. **Download data** from the Google Drive link above and place files in `data/`.
+3. **Download data** from the [Zenodo archive](https://doi.org/10.5281/zenodo.20749943) and place files in `data/`.
 4. **Knit in order**: open each `.Rmd` in RStudio and knit, or run `rmarkdown::render("R/01_topic_coding.Rmd")` etc. from the project root.
 
 All output (PDF figures, LaTeX tables) is written to `output/`.
@@ -58,7 +66,7 @@ All output (PDF figures, LaTeX tables) is written to `output/`.
 
 ```
 /R/             All analysis scripts (numbered, snake_case)
-/data/          Placeholder — download data from Google Drive link above
+/data/          Placeholder — download data from the Zenodo archive (see Data section)
 /output/        Placeholder — populated when scripts are run
 README.md
 PACKAGES.md     Full package list with CRAN links and install instructions
